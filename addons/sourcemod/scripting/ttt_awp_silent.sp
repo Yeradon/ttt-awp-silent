@@ -107,7 +107,7 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort)
 			}
 			GivePlayerItem(client, "weapon_awp");
 			
-			weapon = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
+			int weapon = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
 			
 			if(GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY) != -1){
 				g_alWeapons.Push(weapon);
@@ -148,7 +148,7 @@ public Action:Hook_ShotgunShot(const String:sample[], const Players[], numClient
 	int client = TE_ReadNum("m_iPlayer") + 1;
 	int weapon = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
 	LogDebug("Weapon %i shot by %N", weapon, client);
-	if(IsSilenced(weapon){
+	if(IsSilenced(weapon)){
 		LogDebug("It's a silent shot!");
 		return Plugin_Stop;
 	}
