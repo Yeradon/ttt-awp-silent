@@ -1,0 +1,8 @@
+"Phrases"
+{
+	"Name"
+        {
+                "en"            "Silent AWP"
+                "de"            "Schallgeschützte AWP"
+        }
+}
