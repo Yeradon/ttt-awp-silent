@@ -52,6 +52,8 @@ public void OnPluginStart()
 	
 	LoadTranslations("ttt_awps.phrases");
 	
+	AutoExecConfig_SetFile("plugin.ttt_awp_silent");
+	
 	g_cPriceT = AutoExecConfig_CreateConVar("sm_ttt_awps_price_t", "10000", "Price for the silenced AWP for Traitors", _, true, 0.0);
 	g_cPriceD = AutoExecConfig_CreateConVar("sm_ttt_awps_price_d", "10000", "Price for the silenced AWP for Detectives", _, true, 0.0);
 	g_cPriceI = AutoExecConfig_CreateConVar("sm_ttt_awps_price_i", "10000", "Price for the silenced AWP for Innos", _, true, 0.0);
