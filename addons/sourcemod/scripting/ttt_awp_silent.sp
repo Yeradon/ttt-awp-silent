@@ -147,6 +147,25 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort)
 			}
 			SetEntProp(iWeapon, Prop_Send, "m_iClip1", GetRandomInt(min, max));
 		}
+		else
+		{
+			int amount = 0;
+			switch (TTT_GetClientRole(client)){
+				case TTT_TEAM_TRAITOR:
+				{
+					amount = g_cAmountT.IntValue;
+				}
+				case TTT_TEAM_DETECTIVE:
+				{
+					amount = g_cAmountD.IntValue;
+				}
+				case TTT_TEAM_INNOCENT:
+				{
+					amount = g_cAmountI.IntValue;
+				}
+			}
+			PrintToChat(client, "%t %t", "tag", "error_buy_limit", amount);
+		}
 	}
 	return Plugin_Continue;
 }

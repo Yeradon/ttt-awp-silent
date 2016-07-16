@@ -1,8 +1,19 @@
-"Phrases"
+﻿"Phrases"
 {
 	"Name"
         {
                 "en"            "Silent AWP"
                 "de"            "Schallgeschützte AWP"
+        }
+	"tag"
+        {
+                "en"            "{orchid}[{green}T{darkred}T{blue}T{orchid}]{lightgreen}"
+                "de"            "{orchid}[{green}T{darkred}T{blue}T{orchid}]{lightgreen}"
+        }
+	"error_buy_limit"
+        {
+		"#format"	"{1:i}"
+                "en"            "You can't buy more than {1} AWP(s) per round!"
+                "de"            "Du kannst nicht mehr als {1} AWP(s) pro Runde kaufen!"
         }
 }
