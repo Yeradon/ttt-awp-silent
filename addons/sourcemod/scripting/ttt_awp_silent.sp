@@ -36,6 +36,7 @@ ConVar g_cMinShotsI = null;
 ConVar g_cAmountT = null;
 ConVar g_cAmountD = null;
 ConVar g_cAmountI = null;
+ConVar g_cSkinSupport = null;
 
 ArrayList g_alWeapons = null;
 
@@ -71,9 +72,10 @@ public void OnPluginStart()
 	g_cMinShotsT = AutoExecConfig_CreateConVar("sm_ttt_awp_min_t", "1", "Minimum shots for the AWP for Traitors", _, true, 0.0);
 	g_cMinShotsD = AutoExecConfig_CreateConVar("sm_ttt_awp_min_d", "1", "Minimum shots for the AWP for Detectives", _, true, 0.0);
 	g_cMinShotsI = AutoExecConfig_CreateConVar("sm_ttt_awp_min_i", "1", "Minimum shots for the AWP for Innos", _, true, 0.0);
-	g_cAmountT = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_t", "2", "How much AWP's can a traitor buy?");
-	g_cAmountD = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_d", "0", "How much AWP's can a detective buy?");
-	g_cAmountI = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_i", "0", "How much AWP's can a innocent buy?");
+	g_cAmountT = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_t", "2", "How many AWPs can traitors buy?", _, true, 0.0);
+	g_cAmountD = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_d", "0", "How many AWPs can detectives buy?", _, true, 0.0);
+	g_cAmountI = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_i", "0", "How many AWPs can innocents buy?", _, true, 0.0);
+	g_cSkinSupport = AutoExecConfig_CreateConVar("sm_ttt_awps_skin_support", "1", "Shall the plugin use weapon skins?", _, true, 0.0);
 	
 	AutoExecConfig_ExecuteFile();
 	AutoExecConfig_CleanFile();
@@ -115,11 +117,12 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort)
 			int iWeapon = GivePlayerItem(client, "weapon_awp");
 			if(iWeapon == -1)
 				return Plugin_Stop;
-			EquipPlayerWeapon(client, iWeapon);
+			if(g_cSkinSupport.BoolValue)
+				EquipPlayerWeapon(client, iWeapon);
 			
 			g_alWeapons.Push(iWeapon);
 			
-			LogDebug("Smn bought silenced awp :O with id: %i", iWeapon);
+			LogDebug("Smn bought silenced awp with id: %i", iWeapon);
 			
 			SetEntProp(iWeapon, Prop_Send, "m_iPrimaryReserveAmmoCount", 0);
 			
@@ -151,6 +154,8 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort)
 public Action Hook_ShotgunShot(const char[] sample, const int[] Players, int numClients, float delay)
 {
 	int client = TE_ReadNum("m_iPlayer") + 1;
+	
+	//well while this checks aren't necessary they give good_live a good feeling...
 	if(!TTT_IsClientValid(client))
 		return Plugin_Continue;
 	char sWeapon[32];
