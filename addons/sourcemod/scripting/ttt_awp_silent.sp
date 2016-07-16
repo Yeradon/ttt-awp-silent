@@ -75,7 +75,7 @@ public void OnPluginStart()
 	g_cAmountT = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_t", "2", "How many AWPs can traitors buy?", _, true, 0.0);
 	g_cAmountD = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_d", "0", "How many AWPs can detectives buy?", _, true, 0.0);
 	g_cAmountI = AutoExecConfig_CreateConVar("sm_ttt_awps_amount_i", "0", "How many AWPs can innocents buy?", _, true, 0.0);
-	g_cSkinSupport = AutoExecConfig_CreateConVar("sm_ttt_awps_skin_support", "1", "Shall the plugin use weapon skins?", _, true, 0.0);
+	g_cSkinSupport = AutoExecConfig_CreateConVar("sm_ttt_awps_skin_support", "1", "Shall the plugin use weapon skins?", _, true, 0.0, true, 1.0);
 	
 	AutoExecConfig_ExecuteFile();
 	AutoExecConfig_CleanFile();
